@@ -14,13 +14,12 @@ import pandas as pd
 
 #%%
 
-year,month,decimal_date,average,deseasonalized,ndays,sdev, unc = np.loadtxt('Data/monthly_co2_conc.csv', skiprows = 53, delimiter = ',', unpack = True)
-
-
-monthly_co2_df = pd.read_csv('Data/monthly_co2_conc.csv', skiprows = 52)
+#year,month,decimal_date,average,deseasonalized,ndays,sdev,unc = np.loadtxt('Data/monthly_co2_conc.csv', skiprows = 53, delimiter = ',', unpack = True)
+year,month,decimal_date,average,deseasonalized,ndays,sdev,unc = np.loadtxt('Data/co2_month.csv', skiprows = 53, delimiter = ',', unpack = True)
+#monthly_co2_df = pd.read_csv('Data/monthly_co2_conc.csv', skiprows = 52)
 
 monthly_temp_df = pd.read_csv('Data/temp_monthly.csv')
-
+monthly_co2_df = pd.read_csv('Data/co2_month.csv', skiprows = 52)
 
 df_gistemp = monthly_temp_df[monthly_temp_df.Source != "GCAG"]
 
@@ -38,7 +37,10 @@ df_gistemp.plot('Date','Mean', title = 'monthly mean temperature anomaly (C)')
 
 #%%
 
-monthly_co2_df.plot('decimal_date','average', title = 'monthly mean co2 concentration (ppm)')
+monthly_co2_df.plot('decimal_date',['average', 'deseasonalized'],title = 'monthly mean co2 concentration (ppm)')
+#monthly_co2_df.plot('decimal_date','deseasonalized', title = 'monthly mean co2 concentration (ppm)')
+
+
 
 
 
