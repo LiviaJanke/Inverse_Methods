@@ -53,7 +53,7 @@ def forward_poly(t,n):
 
 n = 5
 
-m = len(year)
+m = len(decimal_date)
 
 y = average
 
@@ -79,15 +79,16 @@ residuals = y-ylsq
 
 
 #%%
-#plt.plot(year, deseasonalized)
-plt.plot(year, ylsq, label = 'least squares soln')
-plt.plot(year, average, label = 'co2')
+plt.plot(decimal_date, deseasonalized)
+plt.plot(decimal_date, ylsq, label = 'least squares soln')
+plt.plot(decimal_date, average, label = 'co2')
+plt.legend()
 plt.show()
 
 
 #%%
 
-plt.plot(year, residuals)
+plt.plot(decimal_date, residuals)
 plt.show()
 
 #%%
