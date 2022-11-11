@@ -40,10 +40,57 @@ df_gistemp.plot('Date','Mean', title = 'monthly mean temperature anomaly (C)')
 monthly_co2_df.plot('decimal_date',['average', 'deseasonalized'],title = 'monthly mean co2 concentration (ppm)')
 #monthly_co2_df.plot('decimal_date','deseasonalized', title = 'monthly mean co2 concentration (ppm)')
 
+#%%
+
+
+def forward_poly(t,n):
+    
+    Ki = np.array([t**j for j in range (n)])
+    
+    return Ki
+
+#%%
+
+n = 5
+
+m = len(year)
+
+y = average
+
+K = np.zeros([m,n])
+
+for i in range(m):
+    K[i,:] = forward_poly(year[i],n)
+    
+    
+print(np.linalg.matrix_rank(K))
+
+print(K)
+
+#%%
+
+xlsq, res, rank, svd = np.linalg.lstsq(K,y,rcond = -1)
+
+ylsq = K.dot(xlsq)
+
+residuals = y-ylsq
 
 
 
 
+#%%
+#plt.plot(year, deseasonalized)
+plt.plot(year, ylsq, label = 'least squares soln')
+plt.plot(year, average, label = 'co2')
+plt.show()
+
+
+#%%
+
+plt.plot(year, residuals)
+plt.show()
+
+#%%
 
 
 
